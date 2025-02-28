@@ -1,0 +1,76 @@
+/* Importar otro tipo de FONT */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Miniver&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* Variables */
+:root {
+    --background-color: #f5f5f5;
+
+    /* Font size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
+
+    /* Border radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
+
+    /* Site max width */
+    --site-max-width: 1300px;
+}
+/* ----------------------------------- */
+
+/* Styles 4 the Entire Page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+}
+
+/* Body para el background */
+body {
+    background: var(--background-color)
+}
+
+/* Como quiero que me ordene todo lo del main */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vmin;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+/* ------------------------------------------ */
+
+/* Estilos Titulo */
+
+
+/* ------------------------------------------ */
+
+/* Alinear todo en un ROW - cada dash section*/
+.main-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-section .dash-section {
+    padding: 20px;
+}
