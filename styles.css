@@ -3,7 +3,25 @@
 
 /* Variables */
 :root {
-    --background-color: #f5f5f5;
+    --background-color: #e7f3f8;
+
+    --not-completed-title:  #ff403f;
+    --not-completed-body:  #f55a5c;
+
+    --progress-title: #f7e34a;
+    --progress-body: #ffff77;
+
+    --completed-title:  #acc64a;
+    --completed-body: #edf6c5;
+
+    --list-item: #e3eaf5;
+
+    /* Font Weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
 
     /* Font size */
     --font-size-s: 0.9rem;
@@ -64,13 +82,133 @@ button {
 
 
 /* ------------------------------------------ */
-
-/* Alinear todo en un ROW - cada dash section*/
+/* Disenio para cada column */
 .main-section {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .main-section .dash-section {
-    padding: 20px;
+    border-radius: var(--border-radius-s);
+    padding: 20px 20px;
 }
+
+/* Alinear todo en un ROW - cada dash section*/
+.row-section {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 40px;
+    justify-content: space-between;
+}
+
+/* Colores para el titulo */
+.main-section .dash-section .row-section {
+    border-radius: var(--border-radius-s) var(--border-radius-s) 0 0;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0;
+}
+
+.title-not-completed {
+    background: var(--not-completed-title);
+}
+
+.title-progress {
+    background: var(--progress-title);
+}
+
+.title-completed {
+    background: var(--completed-title)
+}
+
+/* Modificaciones al boton */
+.dash-section .row-section .add-btn {
+    font-size: var(--font-size-xl);
+    padding: 0px 10px;
+    font-weight: var(--font-weight-bold);
+
+    transition: 0.4s ease;
+}
+
+.dash-section .row-section .add-btn:hover{
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+/* Cuerpo de Secciones */
+.main-section .dash-section .list-actv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 var(--border-radius-s) var(--border-radius-s);
+    gap: 4px;
+}
+
+.main-section .dash-section .not-list {
+    background: var(--not-completed-body)
+}
+
+.main-section .dash-section .progress-list {
+    background: var(--progress-body)
+}
+
+.main-section .dash-section .completed-list {
+    background: var(--completed-body)
+}
+
+/* Estilizacion del boton de meter task */
+.main-section .dash-section .list-actv .task-input {
+    flex: 1; /* Para que ocupe el espacio disponible */
+    margin: 10px;
+    padding: 5px 5px;
+    border-radius: var(--border-radius-s);
+    border: 2px solid #ccc;
+    font-size: var(--font-size-s);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-section .dash-section .list-actv .check-btn {
+    font-size: var(--font-size-m);
+
+    transition: 0.3s ease;
+}
+
+.main-section .dash-section .list-actv .check-btn:hover {
+    color: var(--background-color);
+    transform: scale(1.1);
+}
+
+/* Estilizacion para los lis */
+.main-section .dash-section .list-actv .activities li {
+    margin: 15px;
+    padding: 5px 10px;
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    transition: 0.4s ease;
+    border-radius: var(--border-radius-s);
+}
+
+.main-section .dash-section .list-actv .activities li:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos de cada item en la lista */
+.main-section .dash-section .activities .not-item {
+    background: var(--not-completed-title);
+}
+
+.main-section .dash-section .activities .progress-item {
+    background: var(--progress-title);
+}
+
+.main-section .dash-section .activities .completed-item {
+    background: var(--completed-title);
+}
+
+
+
