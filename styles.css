@@ -6,10 +6,10 @@
     --background-color: #e7f3f8;
 
     --not-completed-title:  #ff403f;
-    --not-completed-body:  #f55a5c;
+    --not-completed-body:  #ffa6ac;
 
     --progress-title: #f7e34a;
-    --progress-body: #ffff77;
+    --progress-body: #fafad2;
 
     --completed-title:  #acc64a;
     --completed-body: #edf6c5;
@@ -104,9 +104,14 @@ button {
 
 /* Colores para el titulo */
 .main-section .dash-section .row-section {
-    border-radius: var(--border-radius-s) var(--border-radius-s) 0 0;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.main-section .dash-section .title {
+    border-radius: var(--border-radius-s) var(--border-radius-s) 0 0;
     border-bottom: 0;
 }
 
@@ -120,6 +125,14 @@ button {
 
 .title-completed {
     background: var(--completed-title)
+}
+
+/* Modificaciones para la Cantidad */
+.main-section .dash-section .title .task-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
 }
 
 /* Modificaciones al boton */
@@ -209,6 +222,8 @@ button {
 .main-section .dash-section .activities .completed-item {
     background: var(--completed-title);
 }
+
+
 
 
 
