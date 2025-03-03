@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const inputBox = createInputBox();
             const listContainer = button.closest('.dash-section').querySelector('.list-actv');
-            listContainer.appendChild(inputBox);
+            const referenceNode = listContainer.querySelector('.activities');
+            listContainer.insertBefore(inputBox, referenceNode);
 
             attachCheckButtonListener(inputBox, button);
         });
@@ -20,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('dragover', dragOver);
         container.addEventListener('drop', drop);
     });
+
+    loadTasks();
 });
 
 function createInputBox() {
@@ -55,6 +58,7 @@ function processTask(inputBox, button, taskInput) {
         inputBox.remove();
 
         updateTaskCounter(button.closest('.dash-section'));
+        saveTasks();
     }
 }
 
@@ -145,6 +149,8 @@ function drop(event) {
         if (dragSourceSection && dragSourceSection !== destSection) {
             updateTaskCounter(dragSourceSection);
         }
+
+        saveTasks();
     }
 }
 
@@ -182,4 +188,59 @@ function getTasksNumb(title){
     console.log(qntActv)
 
     return qntActv;
+}
+
+function saveTasks() {
+    // Creamos un objeto para almacenar las tareas de cada sección
+    const tasksData = {};
+  
+    document.querySelectorAll('.dash-section').forEach(section => {
+      // Usamos el id de la sección para identificarla
+      const sectionId = section.id;
+      // Obtenemos el <ul> donde están las tareas
+      const ul = section.querySelector('.activities');
+      // Creamos un arreglo de tareas (en este caso, solo el texto)
+      const tasks = [];
+      ul.querySelectorAll('li').forEach(li => {
+        tasks.push({
+          text: li.textContent,
+          // Guardar la clase del li
+          className: li.className
+        });
+      });
+      tasksData[sectionId] = tasks;
+    });
+  
+    // Guardamos el objeto en localStorage convirtiéndolo a JSON
+    localStorage.setItem('tasks', JSON.stringify(tasksData));
+}
+
+function loadTasks() {
+    const tasksData = localStorage.getItem('tasks');
+    if (tasksData) {
+      const tasks = JSON.parse(tasksData);
+      // Recorremos cada sección
+      Object.keys(tasks).forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          // Obtenemos el <ul> donde se deben colocar las tareas
+          const ul = section.querySelector('.activities');
+          // Limpiamos la lista actual
+          ul.innerHTML = '';
+          // Por cada tarea en la sección, creamos el <li>
+          tasks[sectionId].forEach(taskInfo => {
+            const li = document.createElement('li');
+            li.textContent = taskInfo.text;
+            li.className = taskInfo.className;
+            li.setAttribute('draggable', 'true');
+            // Agregamos los listeners para el drag and drop
+            li.addEventListener('dragstart', dragStart);
+            li.addEventListener('dragend', dragEnd);
+            ul.appendChild(li);
+          });
+          // Actualizamos el contador de tareas de la sección
+          updateTaskCounter(section);
+        }
+      });
+    }
 }
