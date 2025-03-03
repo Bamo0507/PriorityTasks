@@ -215,6 +215,27 @@ button {
     transform: scale(1.1);
 }
 
+/* Efectos para el drag y drop */
+
+.activities {
+    min-height: 50px; /* Permite hacer drop incluso si no hay tareas (li) */
+    transition: background-color 0.3s ease;
+}
+
+.activities.drag-over {
+    background-color: rgba(0, 0, 0, 0.1); /* Efecto visual al estar en zona de drop */
+}
+
+/* Efecto de transición para las tasks (opcional) */
+.activities li {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto visual para el elemento que se está arrastrando */
+.dragging {
+    opacity: 0.6;
+}
+
 /* Estilos de cada item en la lista */
 .main-section .dash-section .activities .not-item {
     background: var(--not-completed-title);
