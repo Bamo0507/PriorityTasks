@@ -27,18 +27,27 @@ function createInputBox() {
 
 function attachCheckButtonListener(inputBox, button) {
     const checkButton = inputBox.querySelector('.check-btn');
-    checkButton.addEventListener('click', () => {
-        const taskInput = inputBox.querySelector('.task-input');
-        if (taskInput.value.trim() !== '') {
-            const taskItem = createTaskItem(taskInput.value, inputBox.parentElement.classList);
-            const taskList = button.closest('.dash-section').querySelector('.activities');
-            taskList.appendChild(taskItem);
-            inputBox.remove();
+    const taskInput = inputBox.querySelector('.task-input');
 
-            // After cliking, update de count
-            updateTaskCounter(button.closest('.dash-section'));
+    checkButton.addEventListener('click', () => processTask(inputBox,button,taskInput));
+
+    // Listener con la tecla "Enter"
+    taskInput.addEventListener('keydown', (event) => {
+        if (event.key === "Enter") {
+            processTask(inputBox, button, taskInput);
         }
     });
+}
+
+function processTask(inputBox, button, taskInput) {
+    if (taskInput.value.trim() !== '') {
+        const taskItem = createTaskItem(taskInput.value, inputBox.parentElement.classList);
+        const taskList = button.closest('.dash-section').querySelector('.activities');
+        taskList.appendChild(taskItem);
+        inputBox.remove();
+
+        updateTaskCounter(button.closest('.dash-section'));
+    }
 }
 
 function createTaskItem(taskText, parentClassList) {
@@ -75,6 +84,11 @@ function updateTaskCounter(dashSection) {
     const counter = title.querySelector('.task-counter');
     if (counter) {
         counter.textContent = "Quantity: " + getTasksNumb(title);
+        counter.classList.add("scale-animation");
+
+        setTimeout(() => {
+            counter.classList.remove("scale-animation");
+        }, 800);
     }
 }
 
